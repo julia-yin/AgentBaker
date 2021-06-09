@@ -88,6 +88,7 @@ func getWindowsCustomDataVariables(config *datamodel.NodeBootstrappingConfigurat
 		"windowsPauseImageURL":                 cs.Properties.WindowsProfile.WindowsPauseImageURL,
 		"alwaysPullWindowsPauseImage":          strconv.FormatBool(cs.Properties.WindowsProfile.IsAlwaysPullWindowsPauseImage()),
 		"windowsCalicoPackageURL":              cs.Properties.WindowsProfile.WindowsCalicoPackageURL,
+		"windowsGMSAv2PackageURL":              cs.Properties.WindowsProfile.WindowsGMSAv2PackageURL,
 	}
 
 	return customData

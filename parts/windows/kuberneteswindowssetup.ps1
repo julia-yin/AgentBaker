@@ -173,6 +173,9 @@ $global:AlwaysPullWindowsPauseImage = [System.Convert]::ToBoolean("{{GetVariable
 # Calico
 $global:WindowsCalicoPackageURL = "{{GetVariable "windowsCalicoPackageURL" }}";
 
+# GMSAv2
+$global:WindowsGMSAv2PackageURL = "{{GetVariable "windowsGMSAv2PackageURL" }}";
+
 # TLS Bootstrap Token
 $global:TLSBootstrapToken = "{{GetTLSBootstrapTokenForKubeConfig}}"
 
@@ -487,6 +490,9 @@ try
         Write-Log "Update service failure actions"
         Update-ServiceFailureActions -ContainerRuntime $global:ContainerRuntime
 
+        Enable-FIPSMode -FipsEnabled $fipsEnabled
+        Install-GMSAv2Plugin -GMSAv2PackageURL $global:WindowsGMSAv2PackageURL
+
         Adjust-DynamicPortRange
         Register-LogsCleanupScriptTask
         Register-NodeResetScriptTask
@@ -517,9 +523,6 @@ try
             $kubeConfigFile = [io.path]::Combine($KubeDir, "config")
             Remove-Item $kubeConfigFile
         }
-
-        # Enable FIPS-mode
-        Enable-FIPSMode $fipsEnabled
 
         # Postpone restart-computer so we can generate CSE response before restarting computer
         Write-Log "Setup Complete, reboot computer"
