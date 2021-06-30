@@ -114,6 +114,17 @@ const (
 	TempDisk KubeletDiskType = "Temporary"
 )
 
+
+// KubeletType indicates whether node pool is container-based or Web Assembly-based.
+type KubeletType string
+
+const (
+	// DefaultKubelet indicates that Kubelet will be used in the node pool.
+	DefaultKubelet KubeletType = "Kubelet"
+	// KrustletKubelet indicates that Krustlet will be used in the node pool.
+	KrustletKubelet KubeletType = "Krustlet"
+)
+
 // Distro represents Linux distro to use for Linux VMs
 type Distro string
 
@@ -621,7 +632,7 @@ type AgentPoolProfile struct {
 	VMSize                              string               `json:"vmSize"`
 	OSDiskSizeGB                        int                  `json:"osDiskSizeGB,omitempty"`
 	KubeletDiskType                     KubeletDiskType      `json:"kubeletDiskType,omitempty"`
-	KubeletType                         string               `json:"kubeletType,omitempty"`
+	KubeletType                         KubeletType          `json:"kubeletType,omitempty"`
 	DNSPrefix                           string               `json:"dnsPrefix,omitempty"`
 	OSType                              OSType               `json:"osType,omitempty"`
 	Ports                               []int                `json:"ports,omitempty"`
