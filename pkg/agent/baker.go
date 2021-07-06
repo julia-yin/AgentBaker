@@ -585,7 +585,7 @@ func getContainerServiceFuncMap(config *datamodel.NodeBootstrappingConfiguration
 			return ""
 		},
 		"IsKrustlet": func() bool {
-			return profile.KubeletType == "Krustlet"
+			return strings.EqualFold(profile.KubeletType, "Krustlet")
 		},
 		"TeleportEnabled": func() bool {
 			return config.EnableACRTeleportPlugin
