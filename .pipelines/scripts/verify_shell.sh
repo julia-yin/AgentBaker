@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 #inspired by https://github.com/Azure/aks-engine/blob/master/scripts/validate-shell.sh
-installed=$(command -v shellcheck 2>&1 >/dev/null)
-if [[ ${installed} -ne 0 ]]; then
+installed=$(command -v shellcheck 2>&1)
+if [ "${installed}" == "" ]; then
     echo "shellcheck not installed...trying to install."
     DISTRO=$(uname | tr "[:upper:]" "[:lower:]")
     if [[ "${DISTRO}" == "ubuntu" ]]; then
