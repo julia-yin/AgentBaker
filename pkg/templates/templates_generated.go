@@ -4124,7 +4124,7 @@ write_files:
     {{GetVariableProperty "cloudInitData" "reconcilePrivateHostsService"}}
 {{- end}}
 
-# {{- if IsKrustlet}}
+ {{- if IsKrustlet}}
 - path: /etc/systemd/system/krustlet.service
   permissions: "0644"
   encoding: gzip
